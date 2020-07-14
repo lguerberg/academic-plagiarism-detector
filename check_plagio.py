@@ -26,7 +26,17 @@ documentos_input = os.listdir(path_to_check)
 path_to_check = path_to_check + documentos_input[0]
 
 print("Cargando documento: ", path_to_check)
-doc_to_check = txr.convert_docx_to_txt(path_to_check)
+
+if path_to_check.endswith('.pdf'):
+    doc_to_check = txr.convert_pdf_to_txt(path_to_check)
+
+elif path_to_check.endswith('.docx'):
+    doc_to_check = txr.convert_docx_to_txt(path_to_check)
+
+else:
+    print("Error al leer el archivo de input. Formato no soportado.")
+    exit(1)
+    
 plagios = ""
 tema_documento = classifier.clasificar_documento(doc_to_check)
 #-----------------O----------------------
